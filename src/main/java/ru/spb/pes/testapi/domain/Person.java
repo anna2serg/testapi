@@ -1,5 +1,7 @@
 package ru.spb.pes.testapi.domain;
 
+import java.util.Objects;
+
 public class Person {
 
     private Integer id;
@@ -40,5 +42,27 @@ public class Person {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(getId(), getName(), getSurname());
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }  	
+        if (!(obj instanceof Person)) {
+            return false;
+        }       
+        Person other = (Person)obj;
+        
+        return (Objects.equals(other.id, this.id)) && 
+        	   (Objects.equals(other.name, this.name)) && 
+			   (Objects.equals(other.surname, this.surname)); 
+	}
+	
+	
     
 }
